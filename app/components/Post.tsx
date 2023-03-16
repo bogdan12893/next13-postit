@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function Post({ id, name, avatar, postTitle }) {
+export default function Post({ id, name, avatar, postTitle, comments }) {
   return (
-    <div className="bg-white my-8 p-8 rounded-lg ">
+    <div className="bg-white my-8 p-8 rounded-lg">
       <div className="flex items-center gap-2">
         <Image
           className="rounded-full"
@@ -26,8 +26,7 @@ export default function Post({ id, name, avatar, postTitle }) {
           }}
         >
           <p className=" text-sm font-bold text-gray-700">
-            {/* {comments?.length} Comments */}
-            comment
+            {comments?.length} Comments
           </p>
         </Link>
       </div>

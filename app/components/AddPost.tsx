@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 export default function AddPost() {
   const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  const queryCLient = useQueryClient();
   let toastPostID: string = "default";
 
   const { mutate } = useMutation(
@@ -21,6 +22,7 @@ export default function AddPost() {
       },
       onSuccess: (data) => {
         toast.success("Post created successfully", { id: toastPostID });
+        queryCLient.invalidateQueries(["posts"]);
         setTitle("");
         setIsDisabled(false);
       },
