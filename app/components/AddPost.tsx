@@ -9,19 +9,19 @@ export default function AddPost() {
   const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const queryCLient = useQueryClient();
-  let toastPostID: string = "default";
+  let toastPostId: string = "default";
 
   const { mutate } = useMutation(
     async (title: string) => await axios.post("/api/posts/addPost", { title }),
     {
       onError: (error) => {
         if (error instanceof AxiosError) {
-          toast.error(error?.response?.data.message, { id: toastPostID });
+          toast.error(error?.response?.data.message, { id: toastPostId });
         }
         setIsDisabled(false);
       },
       onSuccess: (data) => {
-        toast.success("Post created successfully", { id: toastPostID });
+        toast.success("Post created successfully", { id: toastPostId });
         queryCLient.invalidateQueries(["posts"]);
         setTitle("");
         setIsDisabled(false);
@@ -31,7 +31,7 @@ export default function AddPost() {
 
   const submitPost = async (e: React.FormEvent) => {
     e.preventDefault();
-    toastPostID = toast.loading("Creating your post", { id: toastPostID });
+    toastPostId = toast.loading("Creating your post", { id: toastPostId });
     setIsDisabled(true);
     mutate(title);
   };
